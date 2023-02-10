@@ -31,8 +31,16 @@ class AppbarWidget extends StatelessWidget {
     log('Pressed sort by artist');
   }
 
-  void onPressHelp() {
-    log('Pressed help');
+  Future<void> onPressHelp(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const SimpleDialog(
+          title: Text('About az! player'),
+          children: [Text('Hello there')],
+        );
+      },
+    );
   }
 
   // Exit button
@@ -49,7 +57,7 @@ class AppbarWidget extends StatelessWidget {
           _menuItem('Update songs', onPressUpdateSongs),
           _menuItem('Sort by Name', onPressSortByName),
           _menuItem('Sort by Artist', onPressSortByArtist),
-          _menuItem('Help', onPressHelp),
+          _menuItem('Help', () => onPressHelp(context)),
           _menuItem('Exit', onPressedExit),
         ],
       ),
